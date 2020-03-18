@@ -1,0 +1,8 @@
+server:
+  port: 1001
+spring:
+  profiles: prod
+#日志
+logging:
+  config: classpath:log/logback.xml
+  path: usr/eureka-server/log/eureka-server

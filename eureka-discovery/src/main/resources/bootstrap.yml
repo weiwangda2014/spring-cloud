@@ -1,0 +1,54 @@
+#公共配置
+server:
+  port: 2505
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    #服务名称，更关键，使用feign进行服务消费将以此为依据
+    name: eureka-discovery
+  #激活哪一个环境的配置文件
+  profiles:
+    active: dev
+  zipkin:
+    service:
+      name: sos
+    locator:
+      discovery:
+        enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: false
+    show-sql: true
+    open-in-view: false
+    properties:
+      javax:
+        persistence:
+          sharedCache:
+            mode: ALL
+      hibernate:
+        enable_lazy_load_no_trans: true
+  cloud:
+    config:
+      uri: http://localhost:1001
+      label: discovery
+    kafka:
+      bindings:
+        sleuth:
+          consumer:
+            startOffset: latest
+            resetOffsets: false
+      binder:
+        brokers: 127.0.0.1:9092
+        zkNodes: 127.0.0.1:9092
+    stream:
+      bindings:
+        output.destination: adTopic
+ad:
+  annotations:
+    default:
+      suppressed: modelling.architecture
+  registry:
+    eureka:
+      endpoint: http://localhost:1001/eureka/apps

@@ -1,0 +1,10 @@
+#生产环境配置
+server:
+  #端口
+  port: 9090
+spring:
+  profiles: prod
+#日志
+logging:
+  config: classpath:log/logback.xml
+  path: /home/log/eureka-consumer

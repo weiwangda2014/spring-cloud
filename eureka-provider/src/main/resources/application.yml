@@ -1,0 +1,36 @@
+#公共配置
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    #服务名称，更关键，使用feign进行服务消费将以此为依据
+    name: eureka-provider
+  #激活哪一个环境的配置文件
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: false
+    show-sql: true
+    open-in-view: false
+    properties:
+      javax:
+        persistence:
+          sharedCache:
+            mode: ALL
+      hibernate:
+        enable_lazy_load_no_trans: true
+#配置eureka获取服务地址，这里使用的是本地注册中心
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1001/eureka/
+  #配置Swagger相关信息
+  instance:
+    prefer-ip-address: true
+    instanceId: ${spring.cloud.client.ip-address}:${server.port}
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui.html # ${server.port}为该服务的端口号
+
