@@ -3,6 +3,7 @@ package de.uni_stuttgart.iste.ms_runtime_analysis.exporters;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
+
 import de.uni_stuttgart.iste.ms_runtime_analysis.helper.Logger;
 import de.uni_stuttgart.iste.ms_runtime_analysis.helper.StringUtils;
 import de.uni_stuttgart.iste.ms_runtime_analysis.interfaces.ExporterInterface;
@@ -16,7 +17,7 @@ public class human_readable implements ExporterInterface {
 
     /**
      * Export the calculated metrics in an human readable format
-     * 
+     *
      * @param configuration application parameters
      * @param params        exporter parameters
      * @param metrics       calculated metrics
@@ -141,7 +142,6 @@ public class human_readable implements ExporterInterface {
                 }
 
             }
-
 
 
         }

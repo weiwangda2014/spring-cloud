@@ -20,6 +20,11 @@
         <module>eureka-provider</module>
         <module>eureka-consumer</module>
         <module>eureka-discovery</module>
+        <module>microservices-runtime-analysis-master</module>
+        <module>zipkin-server</module>
+        <module>eureka-service1</module>
+        <module>eureka-service2</module>
+        <module>eureka-service3</module>
     </modules>
 
 </project>

@@ -1,9 +1,12 @@
 package org.cloud.provider.controller;
 
+
 import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
+import org.cloud.provider.entity.Trips;
 import org.cloud.provider.entity.User;
+import org.cloud.provider.repository.TripsRepository;
 import org.cloud.provider.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,37 +20,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
 
 @Controller
-@RequestMapping("/users")
-@Api(value = "eureka-provider", description = "用户查询接口")
-public class UserController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+@RequestMapping("/trips")
+@Api(value = "eureka-provider", description = "行程查询接口")
+public class TripsController {
 
-    protected final UserRepository userRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(TripsController.class);
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    protected final TripsRepository tripsRepository;
+
+    public TripsController(TripsRepository tripsRepository) {
+        this.tripsRepository = tripsRepository;
     }
 
     /**
-     * 查询所有的用户信息
+     * 查询所有的行程信息
      *
-     * @param name
+     * @param start
+     * @param end
      * @return
      */
     @ResponseBody
     @GetMapping("/list")
     public String list(
-            @ApiParam(value = "用户名") @RequestParam(required = false) String name) {
+            @ApiParam(value = "出发") @RequestParam(required = false) String start, @ApiParam(value = "终点") @RequestParam(required = false) String end) {
         String json;
         Map map = new HashMap<>();
         try {
-            User user = new User();
-            user.setLoginName(name);
-            Example<User> example = Example.of(user);
-            List<User> users = userRepository.findAll(example);
+            Trips trips = new Trips();
+            trips.setStart(start);
+            trips.setEnd(end);
+            Example<Trips> example = Example.of(trips);
+            List<Trips> list = tripsRepository.findAll(example);
             map.put("code", "0");
             map.put("msg", "查询成功");
-            map.put("data", users);
+            map.put("data", list);
             json = JSON.toJSONString(map);
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,22 +68,18 @@ public class UserController {
 
     @ResponseBody
     @GetMapping("/add")
-    public String add() {
+    public String add( @ApiParam(value = "出发") @RequestParam(required = false) String start, @ApiParam(value = "终点") @RequestParam(required = false) String end) {
         String json;
         Map map = new HashMap<>();
         try {
-            User user = new User();
-            user.setId(UUID.randomUUID().toString());
-            String s = new Random().nextDouble() + "";
-            user.setLoginName(s + "my");
-            user.setUserName(s + "my");
-            user.setEnabled(0);
-            user.setRegistDate(new Date());
-            user.setPassword(s);
-            User users = userRepository.save(user);
+            Trips trips = new Trips();
+            trips.setId(UUID.randomUUID().toString());
+            trips.setStart(start);
+            trips.setEnd(end);
+            trips = tripsRepository.save(trips);
             map.put("code", "0");
             map.put("msg", "保存成功");
-            map.put("data", users);
+            map.put("data", trips);
             json = JSON.toJSONString(map);
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,0 +1,18 @@
+server:
+  port: 8101
+
+spring:
+  application:
+    name: consumer1
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      probability: 1.0
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1001/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+

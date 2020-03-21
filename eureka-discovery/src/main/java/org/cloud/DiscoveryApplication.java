@@ -2,6 +2,7 @@ package org.cloud;
 
 
 import org.cloud.controller.RegistryController;
+import org.cloud.controller.SpanController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -31,6 +32,7 @@ public class DiscoveryApplication extends SpringBootServletInitializer {
         scheduler.scheduleAtFixedRate(() -> {
             try {
                 context.getBean(RegistryController.class).eurekaCall();
+
             } catch (Exception ex ) {
                 //ex.printStackTrace();
                 //log.error(ex.getMessage());
