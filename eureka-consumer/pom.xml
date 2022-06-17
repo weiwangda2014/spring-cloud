@@ -21,7 +21,7 @@
         <commons-codec.version>1.10</commons-codec.version>
         <mybatis-spring-boot.version>1.2.0</mybatis-spring-boot.version>
         <lombok.version>1.16.14</lombok.version>
-        <fastjson.version>1.2.41</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
     </properties>
 
